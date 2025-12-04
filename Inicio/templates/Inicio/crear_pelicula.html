@@ -1,18 +1,28 @@
-{% extends "base.html" %}
+  {% extends "base.html" %}
 
-{% block title_head %} Creando Pelicula {% endblock title_head %}
-{% block contenido %}
-<h1>   Se Cargo una nueva Pelicula {{pelicula_guardada.pelicula}}{{pelicula_guardada.genero}}</h1>
-  <form action={% url "crear" %} method= 'POST'>
+  {% block title_head %} Creando Película {% endblock title_head %}
+  {% block contenido %}
+
+  <h1>Crear nueva Película</h1>
+
+  <form action="{% url 'crear' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-     {{formulario}}
-  
-    <input type="submit" value="Crear" >
-      
-
+      {{ form.as_p }}
+      <input type="submit" value="Crear">
   </form>
 
-{% endblock contenido %}
+  {% if pelicula_guardada %}
+      <h2>Película creada correctamente:</h2>
+      <p><strong>Título:</strong> {{ pelicula_guardada.pelicula }}</p>
+      <p><strong>Género:</strong> {{ pelicula_guardada.genero }}</p>
+      <p><strong>Año:</strong> {{ pelicula_guardada.anio }}</p>
+
+      {% if pelicula_guardada.imagen %}
+          <img src="{{ pelicula_guardada.imagen.url }}" width="200">
+      {% endif %}
+  {% endif %}
+
+  {% endblock contenido %}
 
 
 

@@ -1,7 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
+
 
 {% block contenido %}
 <h1>Detalle de Película</h1>
+
+{% if pelicula.imagen %}
+    <img src="{{ pelicula.imagen.url }}" width="300">
+{% endif %}
 
 <p><strong>Pelicula:</strong> {{ pelicula.pelicula }}</p>
 <p><strong>Género:</strong> {{ pelicula.genero }}</p>
@@ -10,3 +16,4 @@
 <a href="{% url 'listado' %}">Volver al listado</a> 
 
 {% endblock contenido %}
+

@@ -14,6 +14,10 @@
         {% for pelicula in listado_de_peliculas %}
 
         <li>
+        {% if pelicula.imagen %}
+            <img src="{{ pelicula.imagen.url }}" width="120">
+        {% endif %}
+
         {{pelicula}}
         | <a href={% url "ver" pelicula.id%}>Ver</a> 
         | <a href={% url "actualizar" pelicula.id %}>Actualizar</a>

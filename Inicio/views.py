@@ -6,52 +6,36 @@ from Inicio.forms import CrearPelicula
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import UpdateView, DeleteView
 
-
 def actualizar_pelicula(request, id):
-    pelicula = Pelicula.objects.get(id=id)
+    pelicula = get_object_or_404(Pelicula, id=id)
 
     if request.method == "POST":
-        formulario = CrearPelicula(request.POST)
+        formulario = CrearPelicula(request.POST, request.FILES, instance=pelicula)
 
         if formulario.is_valid():
-            pelicula.genero = formulario.cleaned_data['genero']
-            pelicula.save()
+            formulario.save()
             return redirect("listado")
 
     else:
-        formulario = CrearPelicula(initial={
-            "genero": pelicula.genero,
-        })
+        formulario = CrearPelicula(instance=pelicula)
 
     return render(request, "Inicio/actualizar_pelicula.html", {"formulario": formulario})
 
 
-def eliminar_pelicula(request, id):
-    pelicula = get_object_or_404(Pelicula, id=id)
-    pelicula.delete()
-    return redirect('listado')
-
+from django.shortcuts import render
+from .forms import CrearPelicula
+from .models import Pelicula
 
 def crear_pelicula(request):
-    if request.method == 'POST':
-        formulario = CrearPelicula(request.POST)
-
-        if formulario.is_valid():
-            info = formulario.cleaned_data
-
-            pelicula = Pelicula(
-                pelicula=info.get('pelicula'),
-                genero=info.get('genero'),
-                anio=info.get('anio'),
-            )
-            pelicula.save()
-
-            return redirect('listado')
-
+    if request.method == "POST":
+        form = CrearPelicula(request.POST, request.FILES)
+        if form.is_valid():
+            pelicula_guardada = form.save()
+            return render(request, "Inicio/crear_pelicula.html", {"form": CrearPelicula(), "pelicula_guardada": pelicula_guardada})
     else:
-        formulario = CrearPelicula()
+        form = CrearPelicula()
 
-    return render(request, 'Inicio/crear_pelicula.html', {'formulario': formulario})
+    return render(request, "Inicio/crear_pelicula.html", {"form": form})
 
 
 def listar_peliculas(request):
@@ -92,3 +76,8 @@ def ver_pelicula(request, id):
     return render(request, 'Inicio/ver_pelicula.html', {'pelicula': pelicula})
 
 
+
+def eliminar_pelicula(request, id):
+    pelicula = get_object_or_404(Pelicula, id=id)
+    pelicula.delete()
+    return redirect('listar_peliculas')
