@@ -1,6 +1,6 @@
 # Proyecto Django – Entrega 3
 
-Este proyecto es una aplicación web desarrollada con Django 5.2.7, creada como parte del curso / práctica personal. Incluye la estructura básica de un proyecto funcional con vistas, templates y configuración lista para extender, la idea que me surgio fue armar una app donde los usuarios puedan registrase y recomendar peliculas segun genero.
+Este proyecto es una aplicación web desarrollada con Django 5.2.7, creada como parte del curso / práctica personal. Incluye la estructura básica de un proyecto funcional con vistas, templates y configuración lista para extender, la idea que me surgio fue armar una app donde los usuarios puedan registrase, recomendar y buscar peliculas segun genero.
 
 El objetivo del proyecto es demostrar el uso de:
 - Modelos
@@ -33,7 +33,7 @@ Base de datos:
 **Clonar el repositorio 
 ```bash
 git clone https://github.com/juliantaddei1-arch/JulianTaddei-Entrega3.git
-cd JulianTaddei-Entrega3
+cd JulianTaddei-final
 
 ** Crear y activar el entorno virtual:
 
@@ -45,7 +45,7 @@ python -m venv venv
 pip install -r requirements.txt
 
 **Estructura del proyecto:
-JulianTaddei-Entrega3/
+JulianTaddei-Final/
 ├── manage.py
 ├── requirements.txt
 ├── seguimiento/           
@@ -60,4 +60,5 @@ JulianTaddei-Entrega3/
     ├── admin.py
     └── templates/
 
-
+Enlace de video :
+https://drive.google.com/file/d/1fDGsUM9iTIyLxw6sEqU_WeAiCwBORB0H/view?usp=sharing

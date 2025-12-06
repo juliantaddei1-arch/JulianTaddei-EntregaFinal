@@ -6,6 +6,7 @@ class Pelicula(models.Model):
     pelicula = models.CharField(max_length=100)
     genero = models.CharField(max_length=30)
     anio = models.CharField(max_length=4)
+    imagen = models.ImageField(upload_to="peliculas/", null=True, blank=True)
 
     def __str__(self):
         return f'{self.pelicula} - {self.genero} - {self.anio}'
