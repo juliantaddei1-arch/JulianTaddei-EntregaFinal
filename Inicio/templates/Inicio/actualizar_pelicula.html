@@ -1,15 +1,23 @@
 {% extends "base.html" %}
 
-{% block title_head %}Actualizar Película{% endblock title_head %}
-
 {% block contenido %}
-<h1>Actualizar Película</h1>
 
-<form action="" method="post">
+<h1>Actualizar Película: {{ pelicula.pelicula }}</h1>
+
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ formulario.as_p }}
-    <input type="submit" value="Guardar cambios">
+
+    {{ form_pelicula.as_p }}
+    
+    <h3>Agregar nuevas imágenes</h3>
+    {{ form_imagenes.as_p }}
+
+    <button type="submit">Guardar cambios</button>
 </form>
 
-{% endblock contenido %}
+<h3>Imágenes actuales:</h3>
+{% for img in pelicula.imagenes.all %}
+    <img src="{{ img.imagen.url }}" width="200">
+{% endfor %}
 
+{% endblock %}

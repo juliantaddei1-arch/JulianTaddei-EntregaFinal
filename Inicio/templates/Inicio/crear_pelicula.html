@@ -1,29 +1,20 @@
-  {% extends "base.html" %}
+{% extends "base.html" %}
 
-  {% block title_head %} Creando Película {% endblock title_head %}
-  {% block contenido %}
+{% block title_head %} Crear Película {% endblock title_head %}
 
-  <h1>Crear nueva Película</h1>
+{% block contenido %}
+<h1>Crear nueva Película</h1>
 
-  <form action="{% url 'crear' %}" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Crear">
-  </form>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
 
-  {% if pelicula_guardada %}
-      <h2>Película creada correctamente:</h2>
-      <p><strong>Título:</strong> {{ pelicula_guardada.pelicula }}</p>
-      <p><strong>Género:</strong> {{ pelicula_guardada.genero }}</p>
-      <p><strong>Año:</strong> {{ pelicula_guardada.anio }}</p>
+    <h3>Datos de la Película</h3>
+    {{ form_pelicula.as_p }}
 
-      {% if pelicula_guardada.imagen %}
-          <img src="{{ pelicula_guardada.imagen.url }}" width="200">
-      {% endif %}
-  {% endif %}
+    <h3>Imágenes</h3>
+    {{ form_imagenes.as_p }}
 
-  {% endblock contenido %}
+    <button type="submit">Guardar</button>
+</form>
 
-
-
-
+{% endblock %}

@@ -4,12 +4,14 @@ from .models import Pelicula
 class CrearPelicula(forms.ModelForm):
     class Meta:
         model = Pelicula
-        fields = ['pelicula', 'genero', 'anio', 'imagen']
+        fields = ("pelicula", "genero", "anio")
 
-#class CrearPelicula(forms.Form):
- #   pelicula = forms.CharField(max_length=100)
-  #  genero = forms.CharField(max_length=30)
-   # anio= forms.CharField(max_length=4)
 
+class ImagenesPeliculaForm(forms.Form):
+    imagenes = forms.FileField(
+        required=False,
+        widget=forms.ClearableFileInput(),   # sin multiple
+        label="Subir imágenes"
+    )
 class BusquedaPeliculaForm(forms.Form):
-    pelicula =forms.CharField(max_length=30, required=False, label="pelicula") 
+    pelicula = forms.CharField(required=False, label="Buscar película")

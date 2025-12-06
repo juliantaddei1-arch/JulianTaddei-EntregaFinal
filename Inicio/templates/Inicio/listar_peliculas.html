@@ -1,48 +1,41 @@
 {% extends "base.html" %}
 
-{% block title_head %} Listado de Peliculas{% endblock title_head %}
+{% block title_head %}Listado de Películas{% endblock title_head %}
+
 {% block contenido %}
 
-       <form action={% url "listado" %} method="get">
-        {{formulario}}
-        <input type="submit" value="Buscar">
-        </form>
+<h1>Listado de Películas</h1>
 
-    {% if listado_de_peliculas %}
+<form action="{% url 'listar_peliculas' %}" method="get">
+    {{ formulario }}
+    <input type="submit" value="Buscar">
+</form>
 
-    <ul>    
-        {% for pelicula in listado_de_peliculas %}
+{% if peliculas %}
+    <ul>
+        {% for pelicula in peliculas %}
+            <li>
+                <h2>{{ pelicula.pelicula }} ({{ pelicula.anio }})</h2>
+                <p>Género: {{ pelicula.genero }}</p>
 
-        <li>
-        {% if pelicula.imagen %}
-            <img src="{{ pelicula.imagen.url }}" width="120">
-        {% endif %}
+                <h3>Imágenes:</h3>
+                {% for img in pelicula.imagenes.all %}
+                    <img src="{{ img.imagen.url }}" width="200">
+                {% empty %}
+                    <p>No tiene imágenes.</p>
+                {% endfor %}
 
-        {{pelicula}}
-        | <a href={% url "ver" pelicula.id%}>Ver</a> 
-        | <a href={% url "actualizar" pelicula.id %}>Actualizar</a>
-        | <a href={% url "eliminar" pelicula.id %}>Eliminar</a>
-    
-        </li>
+                <a href="{% url 'ver' pelicula.id %}">Ver</a>
+                <a href="{% url 'actualizar' pelicula.id %}">Actualizar</a>
+                <a href="{% url 'eliminar' pelicula.id %}">Eliminar</a>
+            </li>
         {% endfor %}
-
-
-    </ul>  
-
-
-
-     {% else %}
-
-    <p>No se encontraron peliculas. </p> 
-    {% endif %}
-
-   
-
+    </ul>
+{% else %}
+    <p>No se encontraron películas.</p>
+{% endif %}
 
 {% endblock contenido %}
-
- 
-
 
 
 

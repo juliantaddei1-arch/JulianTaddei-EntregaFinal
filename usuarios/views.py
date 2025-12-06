@@ -23,12 +23,12 @@ def login_view(request):
 
         if user:
             login(request, user)
-            return redirect("profile")
+            return redirect("perfil")   # ← NOMBRE CORRECTO
         else:
             messages.error(request, "Usuario o contraseña incorrectos.")
             
     return render(request, "login.html")
-
+    
 def logout_view(request):
     logout(request)
     return redirect("login")

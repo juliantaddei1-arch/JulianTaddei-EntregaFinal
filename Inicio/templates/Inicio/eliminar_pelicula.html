@@ -5,7 +5,7 @@
 
     <form action={% url "eliminar" auto.id %} method='POST'>
         {% csrf_token %}
-        Confirma el borrado del auto {{auto}}???
+        Confirma el borrado de pelicula {{pelicula}}???
 
         <input type="submit" value="Confirmar" >
     </form>
